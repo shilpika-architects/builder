@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShilpiKa.Architects — Interior & Architectural Collaboration</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --warm-white: #faf8f4;
+    --bark: #3d2b1f;
+    --sand: #c9a87c;
+    --sand-light: #e8d5b7;
+    --stone: #8c7b6b;
+    --charcoal: #2a2118;
+    --accent: #b5813a;
+    --soft-shadow: rgba(61,43,31,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--bark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(245,240,232,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(181,129,58,0.2);
+  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; letter-spacing: 0.02em; color: var(--bark); text-decoration: none; }
+  .nav-logo span { color: var(--accent); font-weight: 300; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); text-decoration: none; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta {
+    background: var(--bark); color: var(--cream); padding: 9px 22px;
+    font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+    border: none; cursor: pointer; text-decoration: none;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .nav-cta:hover { background: var(--accent); transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 120px 48px 80px;
+    background: linear-gradient(135deg, var(--warm-white) 0%, #ede5d4 60%, #d9c9ae 100%);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -80px; right: -80px;
+    width: 520px; height: 520px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(181,129,58,0.12), transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -40px; left: 20%;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(61,43,31,0.05), transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 24px; font-weight: 400;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.2rem, 7vw, 6.5rem);
+    line-height: 1.0;
+    font-weight: 300;
+    color: var(--charcoal);
+    max-width: 800px;
+    animation: fadeUp 0.9s 0.1s ease both;
+  }
+  .hero-title em { color: var(--accent); font-style: italic; }
+  .hero-sub {
+    margin-top: 28px;
+    font-size: 1rem; font-weight: 300; color: var(--stone);
+    max-width: 420px; line-height: 1.7;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+  .hero-actions {
+    display: flex; gap: 16px; margin-top: 44px; flex-wrap: wrap;
+    animation: fadeUp 1s 0.3s ease both;
+  }
+  .btn-primary {
+    background: var(--bark); color: var(--cream);
+    padding: 14px 36px; font-size: 0.8rem; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none; border: none; cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+  .btn-wa {
+    background: #25D366; color: white;
+    padding: 14px 36px; font-size: 0.8rem; letter-spacing: 0.08em;
+    text-transform: uppercase; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 10px;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .btn-wa:hover { background: #128C7E; transform: translateY(-2px); }
+  .btn-outline {
+    border: 1.5px solid var(--bark); color: var(--bark);
+    padding: 13px 34px; font-size: 0.8rem; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none; background: transparent;
+    transition: all 0.3s;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .btn-outline:hover { background: var(--bark); color: var(--cream); }
+
+  .hero-stat-row {
+    display: flex; gap: 48px; margin-top: 64px; padding-top: 40px;
+    border-top: 1px solid rgba(61,43,31,0.15);
+    animation: fadeUp 1s 0.4s ease both;
+  }
+  .stat-item { }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 300; color: var(--bark); line-height: 1; }
+  .stat-label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--stone); margin-top: 4px; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── SECTIONS ── */
+  section { padding: 90px 48px; }
+  .section-eyebrow { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; line-height: 1.15; color: var(--charcoal); }
+  .section-title em { color: var(--accent); font-style: italic; }
+  .section-divider { width: 48px; height: 1.5px; background: var(--accent); margin: 24px 0; }
+
+  /* ── ABOUT ── */
+  #about { background: var(--warm-white); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 48px; }
+  .about-text p { color: var(--stone); font-size: 0.95rem; line-height: 1.8; font-weight: 300; margin-bottom: 16px; }
+  .about-services { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 32px; }
+  .service-pill {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 16px; border: 1px solid var(--sand-light);
+    font-size: 0.82rem; color: var(--bark); font-weight: 400;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .service-pill:hover { border-color: var(--accent); background: rgba(181,129,58,0.04); }
+  .service-icon { color: var(--accent); font-size: 1rem; }
+  .about-image-stack { position: relative; height: 480px; }
+  .img-card {
+    position: absolute; overflow: hidden;
+    box-shadow: 0 20px 60px var(--soft-shadow);
+  }
+  .img-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .img-card-main { width: 75%; height: 360px; top: 0; right: 0; }
+  .img-card-accent { width: 55%; height: 240px; bottom: 0; left: 0; border: 4px solid var(--cream); }
+  .principal-badge {
+    position: absolute; bottom: 120px; right: -20px;
+    background: var(--bark); color: var(--cream);
+    padding: 16px 20px; text-align: center; z-index: 2;
+  }
+  .principal-badge .name { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600; letter-spacing: 0.05em; }
+  .principal-badge .role { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.7; margin-top: 2px; }
+
+  /* ── PROBLEMS ── */
+  #why { background: var(--charcoal); }
+  #why .section-title { color: var(--cream); }
+  #why .section-eyebrow { color: var(--sand); }
+  #why .section-divider { background: var(--sand); }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 60px; }
+  .why-column h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--sand); letter-spacing: 0.05em; margin-bottom: 28px; font-weight: 400; }
+  .problem-item { display: flex; gap: 16px; margin-bottom: 24px; align-items: flex-start; }
+  .problem-icon { width: 32px; height: 32px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(201,168,124,0.3); color: var(--sand); font-size: 0.9rem; }
+  .problem-text { font-size: 0.88rem; color: rgba(245,240,232,0.7); line-height: 1.6; font-weight: 300; padding-top: 6px; }
+  .solution-item { display: flex; gap: 16px; margin-bottom: 24px; align-items: flex-start; }
+  .solution-icon { width: 32px; height: 32px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: var(--accent); color: white; font-size: 0.9rem; }
+  .solution-text { font-size: 0.88rem; color: rgba(245,240,232,0.85); line-height: 1.6; font-weight: 300; padding-top: 6px; }
+
+  /* ── MODELS ── */
+  #models { background: var(--cream); }
+  .models-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 56px; }
+  .model-card {
+    background: var(--warm-white); border: 1px solid var(--sand-light);
+    padding: 36px 30px; position: relative; overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .model-card:hover { transform: translateY(-6px); box-shadow: 0 24px 60px var(--soft-shadow); }
+  .model-card.featured { background: var(--bark); border-color: var(--bark); }
+  .model-card.featured * { color: var(--cream) !important; }
+  .model-card.featured .model-tag { background: var(--accent); color: white !important; }
+  .model-card.featured .model-feature { border-bottom-color: rgba(245,240,232,0.15) !important; }
+  .model-num { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; color: var(--sand-light); line-height: 1; }
+  .model-tag { display: inline-block; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; background: rgba(181,129,58,0.1); color: var(--accent); padding: 4px 12px; margin: 12px 0; }
+  .model-title { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 400; color: var(--bark); line-height: 1.25; margin-bottom: 20px; }
+  .model-features { margin-top: 24px; }
+  .model-feature { font-size: 0.82rem; color: var(--stone); padding: 10px 0; border-bottom: 1px solid var(--sand-light); display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; }
+  .model-feature::before { content: '→'; color: var(--accent); flex-shrink: 0; font-size: 0.75rem; margin-top: 1px; }
+  .model-cta { display: inline-block; margin-top: 28px; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 2px; transition: opacity 0.2s; }
+  .model-cta:hover { opacity: 0.7; }
+
+  /* Package table */
+  #packages { background: var(--warm-white); }
+  .table-wrap { overflow-x: auto; margin-top: 48px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  thead tr { background: var(--bark); }
+  thead th { color: var(--cream); padding: 16px 20px; text-align: left; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 400; }
+  tbody tr { border-bottom: 1px solid var(--sand-light); transition: background 0.2s; }
+  tbody tr:hover { background: rgba(181,129,58,0.05); }
+  tbody td { padding: 14px 20px; color: var(--stone); font-weight: 300; vertical-align: top; }
+  tbody td:first-child { color: var(--bark); font-weight: 400; }
+  .tier-badge { display: inline-block; padding: 3px 10px; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  .tier-essential { background: rgba(140,123,107,0.12); color: var(--stone); }
+  .tier-premium { background: rgba(181,129,58,0.15); color: var(--accent); }
+  .tier-luxury { background: var(--bark); color: var(--cream); }
+
+  /* ── REVENUE ── */
+  #revenue { background: linear-gradient(135deg, #e8ddd0 0%, var(--cream) 100%); }
+  .revenue-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 52px; }
+  .rev-card { background: var(--warm-white); padding: 28px; border-left: 3px solid var(--accent); }
+  .rev-icon { font-size: 1.5rem; margin-bottom: 12px; }
+  .rev-title { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 600; color: var(--bark); margin-bottom: 8px; }
+  .rev-desc { font-size: 0.82rem; color: var(--stone); line-height: 1.6; font-weight: 300; }
+
+  /* ── WORKS ── */
+  #works { background: var(--charcoal); }
+  #works .section-title { color: var(--cream); }
+  #works .section-eyebrow { color: var(--sand); }
+  #works .section-divider { background: var(--sand); }
+  .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 48px; }
+  .project-thumb { position: relative; overflow: hidden; background: #1a1208; aspect-ratio: 4/3; cursor: pointer; }
+  .project-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease, filter 0.4s; filter: brightness(0.85); }
+  .project-thumb:hover img { transform: scale(1.06); filter: brightness(1); }
+  .project-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(37,27,16,0.85), transparent 50%);
+    padding: 20px; display: flex; align-items: flex-end;
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .project-thumb:hover .project-overlay { opacity: 1; }
+  .project-label { color: var(--cream); font-size: 0.8rem; letter-spacing: 0.08em; font-weight: 300; }
+  .project-type { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sand); margin-bottom: 4px; }
+  .projects-cta { text-align: center; margin-top: 48px; }
+
+  /* ── MOODBOARD ── */
+  #moodboard { background: var(--cream); }
+  .mood-desc { font-size: 0.92rem; color: var(--stone); max-width: 580px; line-height: 1.8; font-weight: 300; margin-top: 16px; }
+
+  /* ── CONTACT / CTA ── */
+  #contact {
+    background: var(--bark);
+    text-align: center; padding: 100px 48px;
+  }
+  #contact .section-eyebrow { color: var(--sand); }
+  #contact .section-title { color: var(--cream); margin: 0 auto; max-width: 640px; }
+  #contact .section-divider { margin: 24px auto; }
+  #contact p { color: rgba(245,240,232,0.65); font-size: 0.9rem; font-weight: 300; max-width: 400px; margin: 0 auto 44px; line-height: 1.7; }
+  .contact-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 56px; }
+  .wa-big {
+    background: #25D366; color: white;
+    padding: 16px 44px; font-size: 0.88rem; letter-spacing: 0.08em;
+    text-transform: uppercase; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 12px;
+    font-weight: 400;
+    transition: background 0.3s, transform 0.2s;
+    box-shadow: 0 8px 32px rgba(37,211,102,0.3);
+  }
+  .wa-big:hover { background: #128C7E; transform: translateY(-2px); box-shadow: 0 12px 40px rgba(37,211,102,0.4); }
+  .call-btn {
+    border: 1.5px solid rgba(245,240,232,0.3); color: var(--cream);
+    padding: 15px 40px; font-size: 0.88rem; letter-spacing: 0.08em;
+    text-transform: uppercase; text-decoration: none; background: transparent;
+    display: inline-flex; align-items: center; gap: 10px;
+    transition: all 0.3s;
+  }
+  .call-btn:hover { background: rgba(245,240,232,0.1); border-color: var(--cream); }
+  .contact-info { display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; padding-top: 40px; border-top: 1px solid rgba(245,240,232,0.1); }
+  .contact-info-item { text-align: center; }
+  .contact-info-label { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sand); margin-bottom: 6px; }
+  .contact-info-value { font-size: 0.9rem; color: rgba(245,240,232,0.8); font-weight: 300; }
+
+  /* ── FLOATING WA ── */
+  .float-wa {
+    position: fixed; bottom: 28px; right: 28px; z-index: 200;
+    width: 58px; height: 58px; border-radius: 50%;
+    background: #25D366; color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; text-decoration: none;
+    box-shadow: 0 6px 28px rgba(37,211,102,0.45);
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: pulse-wa 2.5s infinite;
+  }
+  .float-wa:hover { transform: scale(1.1); box-shadow: 0 10px 36px rgba(37,211,102,0.6); animation: none; }
+  @keyframes pulse-wa {
+    0%, 100% { box-shadow: 0 6px 28px rgba(37,211,102,0.45); }
+    50% { box-shadow: 0 6px 28px rgba(37,211,102,0.45), 0 0 0 12px rgba(37,211,102,0.12); }
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--charcoal); padding: 28px 48px;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: gap;
+    border-top: 1px solid rgba(181,129,58,0.15);
+  }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--cream); font-weight: 300; letter-spacing: 0.04em; }
+  .footer-logo span { color: var(--accent); }
+  .footer-copy { font-size: 0.72rem; letter-spacing: 0.08em; color: rgba(245,240,232,0.4); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    section { padding: 60px 24px; }
+    .hero { padding: 100px 24px 60px; }
+    .about-grid, .why-grid, .models-grid, .revenue-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero-stat-row { gap: 24px; flex-wrap: wrap; }
+    .about-image-stack { height: 320px; }
+    footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px; }
+  }
+  @media (max-width: 560px) {
+    .projects-grid { grid-template-columns: 1fr; }
+    .hero-title { font-size: 2.6rem; }
+    .models-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Shilpi<span>Ka</span>.Architects</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#models">Models</a></li>
+    <li><a href="#works">Works</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://wa.me/917993554838?text=Hello%20ShilpiKa.Architects!%20I%27m%20interested%20in%20a%20collaboration." class="nav-cta" target="_blank">
+    Connect Now
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-eyebrow">Interior &amp; Architectural Collaboration Proposal</div>
+  <h1 class="hero-title">Spaces That<br><em>Sell Faster.</em></h1>
+  <p class="hero-sub">We partner with builders &amp; realtors to create interiors that command premium pricing, attract serious buyers, and move inventory with confidence.</p>
+  <div class="hero-actions">
+    <a href="https://wa.me/917993554838?text=Hello%20ShilpiKa.Architects!%20I%27m%20interested%20in%20a%20collaboration." class="btn-wa" target="_blank">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp Us
+    </a>
+    <a href="#models" class="btn-outline">View Packages</a>
+  </div>
+  <div class="hero-stat-row">
+    <div class="stat-item">
+      <div class="stat-num">3+</div>
+      <div class="stat-label">Premium Projects</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Collaboration Models</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Client Satisfaction</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-eyebrow">Who We Are</div>
+  <h2 class="section-title">Driven by Design.<br><em>Defined by Detail.</em></h2>
+  <div class="section-divider"></div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>ShilpiKa.Architects is led by Principal Architect <strong>Kavya Sri</strong> — a specialist in architectural and interior design consultation who brings contemporary aesthetics together with functional brilliance.</p>
+      <p>Every space we design tells a story. From concept to execution, we blend clean lines with soulful details, ensuring each residence becomes a home buyers fall in love with before they even move in.</p>
+      <div class="about-services">
+        <div class="service-pill"><span class="service-icon">✦</span> Architectural Consultation</div>
+        <div class="service-pill"><span class="service-icon">✦</span> 2D &amp; 3D Drawings</div>
+        <div class="service-pill"><span class="service-icon">✦</span> Full Execution Services</div>
+        <div class="service-pill"><span class="service-icon">✦</span> Contemporary + Fusion Design</div>
+        <div class="service-pill"><span class="service-icon">✦</span> Budget-Optimized Planning</div>
+        <div class="service-pill"><span class="service-icon">✦</span> Client-Centric Approach</div>
+      </div>
+    </div>
+    <div class="about-image-stack">
+      <div class="img-card img-card-main">
+        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=80" alt="Interior Design">
+      </div>
+      <div class="img-card img-card-accent">
+        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=400&q=80" alt="Design Detail">
+      </div>
+      <div class="principal-badge">
+        <div class="name">Kavya Sri</div>
+        <div class="role">Principal Architect</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="section-eyebrow">The Problem &amp; Solution</div>
+  <h2 class="section-title">Why Builders Need<br><em>Interior Collaboration</em></h2>
+  <div class="section-divider"></div>
+  <div class="why-grid">
+    <div class="why-column">
+      <h3>Key Challenges You Face</h3>
+      <div class="problem-item">
+        <div class="problem-icon">⏱</div>
+        <div class="problem-text">Slow-moving inventory that sits on market for months</div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-icon">👁</div>
+        <div class="problem-text">Buyers struggling to visualize potential in empty flats</div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-icon">↓</div>
+        <div class="problem-text">Constant price negotiation pressure eating into margins</div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-icon">🏢</div>
+        <div class="problem-text">Competition from similar projects in the same locality</div>
+      </div>
+    </div>
+    <div class="why-column">
+      <h3>Our Solutions for You</h3>
+      <div class="solution-item">
+        <div class="solution-icon">🛋</div>
+        <div class="solution-text">Ready-to-sell interior packages that close deals faster</div>
+      </div>
+      <div class="solution-item">
+        <div class="solution-icon">🎨</div>
+        <div class="solution-text">Sample flat styling that creates emotional connection with buyers</div>
+      </div>
+      <div class="solution-item">
+        <div class="solution-icon">📐</div>
+        <div class="solution-text">3D visualization for compelling pre-launch marketing material</div>
+      </div>
+      <div class="solution-item">
+        <div class="solution-icon">🎁</div>
+        <div class="solution-text">Tiered upgrade packages that upsell premium buyers effortlessly</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODELS -->
+<section id="models">
+  <div class="section-eyebrow">How We Work Together</div>
+  <h2 class="section-title">Three Collaboration<br><em>Models</em></h2>
+  <div class="section-divider"></div>
+  <div class="models-grid">
+    <div class="model-card">
+      <div class="model-num">01</div>
+      <div class="model-tag">Model 1</div>
+      <h3 class="model-title">Sample Flat Design Partnership</h3>
+      <div class="model-features">
+        <div class="model-feature">We design &amp; fully execute your sample flat</div>
+        <div class="model-feature">Provide styling &amp; mood boards for all unit types</div>
+        <div class="model-feature">Create a high-end look within your controlled budget</div>
+        <div class="model-feature">Marketing content — reels, brochures, hoardings</div>
+        <div class="model-feature">Higher perceived value &amp; faster sales velocity</div>
+      </div>
+      <a href="https://wa.me/917993554838?text=Hi!%20I'm%20interested%20in%20Model%201%20-%20Sample%20Flat%20Design%20Partnership." class="model-cta" target="_blank">Enquire →</a>
+    </div>
+    <div class="model-card featured">
+      <div class="model-num" style="color:rgba(245,240,232,0.2)">02</div>
+      <div class="model-tag">Most Popular</div>
+      <h3 class="model-title">Pre-Designed Interior Packages</h3>
+      <div class="model-features">
+        <div class="model-feature">Buyer chooses a package during the booking itself</div>
+        <div class="model-feature">Creates an additional revenue stream for every flat</div>
+        <div class="model-feature">Less post-handover chaos for you &amp; the buyer</div>
+        <div class="model-feature">Essential → Premium → Luxury tier structure</div>
+        <div class="model-feature">Modular kitchen, wardrobes, ceiling &amp; feature walls</div>
+      </div>
+      <a href="https://wa.me/917993554838?text=Hi!%20I'm%20interested%20in%20Model%202%20-%20Pre-Designed%20Interior%20Packages." class="model-cta" style="color:var(--sand);border-bottom-color:var(--sand);" target="_blank">Enquire →</a>
+    </div>
+    <div class="model-card">
+      <div class="model-num">03</div>
+      <div class="model-tag">Model 3</div>
+      <h3 class="model-title">Exclusive Interior Partner</h3>
+      <div class="model-features">
+        <div class="model-feature">We become your official interior consultant for all buyers</div>
+        <div class="model-feature">5–8% referral fee on every interior project</div>
+        <div class="model-feature">Or revenue share model — per flat basis</div>
+        <div class="model-feature">Seamless buyer handholding from handover to completion</div>
+        <div class="model-feature">Brand association with a premium design firm</div>
+      </div>
+      <a href="https://wa.me/917993554838?text=Hi!%20I'm%20interested%20in%20Model%203%20-%20Exclusive%20Interior%20Partner." class="model-cta" target="_blank">Enquire →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES TABLE -->
+<section id="packages">
+  <div class="section-eyebrow">Model 2 Breakdown</div>
+  <h2 class="section-title">Interior Package<br><em>Tiers</em></h2>
+  <div class="section-divider"></div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th><span class="tier-badge tier-essential">Essential</span></th>
+          <th><span class="tier-badge tier-premium">Premium</span></th>
+          <th><span class="tier-badge tier-luxury">Luxury</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Modular Kitchen</td>
+          <td>✓ Standard</td>
+          <td>✓ Designer</td>
+          <td>✓ Premium Finish</td>
+        </tr>
+        <tr>
+          <td>Wardrobes</td>
+          <td>Basic Laminate</td>
+          <td>Matte Finish + Loft</td>
+          <td>Veneer + Glass</td>
+        </tr>
+        <tr>
+          <td>False Ceiling</td>
+          <td>Basic</td>
+          <td>LED Integrated</td>
+          <td>Layered Smart Lighting</td>
+        </tr>
+        <tr>
+          <td>Feature Walls</td>
+          <td>—</td>
+          <td>TV Unit Design</td>
+          <td>Full Accent Paneling</td>
+        </tr>
+        <tr>
+          <td>Ideal For</td>
+          <td>Budget Buyers</td>
+          <td>Mid-Segment</td>
+          <td>Premium Clients</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- REVENUE -->
+<section id="revenue">
+  <div class="section-eyebrow">Your ROI</div>
+  <h2 class="section-title">How We Increase<br><em>Your Revenue</em></h2>
+  <div class="section-divider"></div>
+  <div class="revenue-grid">
+    <div class="rev-card"><div class="rev-icon">📈</div><div class="rev-title">Higher Property Value Perception</div><div class="rev-desc">Staged and designed units are valued up to 20% higher by buyers compared to empty shells.</div></div>
+    <div class="rev-card"><div class="rev-icon">⚡</div><div class="rev-title">Reduced Buyer Decision Time</div><div class="rev-desc">Buyers commit faster when they can see themselves living in a beautifully finished space.</div></div>
+    <div class="rev-card"><div class="rev-icon">💰</div><div class="rev-title">Upsell Opportunity</div><div class="rev-desc">Interior packages create a new revenue line on top of your flat sale — no extra floor area needed.</div></div>
+    <div class="rev-card"><div class="rev-icon">🏆</div><div class="rev-title">Lifestyle Branding</div><div class="rev-desc">Associate your project with a premium design identity that buyers remember and recommend.</div></div>
+    <div class="rev-card"><div class="rev-icon">📱</div><div class="rev-title">Marketing Content</div><div class="rev-desc">Reels, walkthroughs, and styled photography that drive engagement and enquiries organically.</div></div>
+    <div class="rev-card"><div class="rev-icon">⭐</div><div class="rev-title">Social Proof</div><div class="rev-desc">Happy homeowners share their beautifully designed spaces — creating word-of-mouth for your next project.</div></div>
+  </div>
+</section>
+
+<!-- WORKS -->
+<section id="works">
+  <div class="section-eyebrow">Portfolio</div>
+  <h2 class="section-title">Previous<br><em>Works</em></h2>
+  <div class="section-divider"></div>
+  <div class="projects-grid">
+    <div class="project-thumb">
+      <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=500&q=75" alt="Living Room">
+      <div class="project-overlay"><div><div class="project-type">Living Room</div><div class="project-label">B.N. Reddy Nagar Residence</div></div></div>
+    </div>
+    <div class="project-thumb">
+      <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=500&q=75" alt="Kitchen">
+      <div class="project-overlay"><div><div class="project-type">Kitchen</div><div class="project-label">Patancheru Villa</div></div></div>
+    </div>
+    <div class="project-thumb">
+      <img src="https://images.unsplash.com/photo-1540518614846-7eded433c457?w=500&q=75" alt="Master Bedroom">
+      <div class="project-overlay"><div><div class="project-type">Master Bedroom</div><div class="project-label">EIPL Cornerstone 3BHK</div></div></div>
+    </div>
+    <div class="project-thumb">
+      <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?w=500&q=75" alt="Bathroom">
+      <div class="project-overlay"><div><div class="project-type">Luxury Bathroom</div><div class="project-label">Premium Residence</div></div></div>
+    </div>
+    <div class="project-thumb">
+      <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=500&q=75" alt="Kids Room">
+      <div class="project-overlay"><div><div class="project-type">Children's Room</div><div class="project-label">Patancheru Villa</div></div></div>
+    </div>
+    <div class="project-thumb">
+      <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=500&q=75" alt="Study Room">
+      <div class="project-overlay"><div><div class="project-type">Study Area</div><div class="project-label">Contemporary Flat</div></div></div>
+    </div>
+  </div>
+  <div class="projects-cta">
+    <a href="https://wa.me/917993554838?text=Hi!%20I%27d%20like%20to%20see%20more%20of%20your%20portfolio." class="btn-wa" target="_blank">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Request Full Portfolio
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-eyebrow">Let's Collaborate</div>
+  <h2 class="section-title">Ready to Build Spaces<br>That <em>Sell Faster?</em></h2>
+  <div class="section-divider"></div>
+  <p>Reach out to explore which collaboration model is the right fit for your upcoming or ongoing project.</p>
+  <div class="contact-actions">
+    <a href="https://wa.me/917993554838?text=Hello%20ShilpiKa.Architects!%20I%27d%20like%20to%20discuss%20a%20collaboration%20for%20my%20project." class="wa-big" target="_blank">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Chat on WhatsApp
+    </a>
+    <a href="tel:+917993554838" class="call-btn">
+      📞 +91 79935 54838
+    </a>
+  </div>
+  <div class="contact-info">
+    <div class="contact-info-item">
+      <div class="contact-info-label">WhatsApp</div>
+      <div class="contact-info-value">+91 79935 54838</div>
+    </div>
+    <div class="contact-info-item">
+      <div class="contact-info-label">Principal Architect</div>
+      <div class="contact-info-value">Kavya Sri</div>
+    </div>
+    <div class="contact-info-item">
+      <div class="contact-info-label">Studio</div>
+      <div class="contact-info-value">ShilpiKa.Architects</div>
+    </div>
+    <div class="contact-info-item">
+      <div class="contact-info-label">Services</div>
+      <div class="contact-info-value">Residential &amp; Builder Projects</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Shilpi<span>Ka</span>.Architects</div>
+  <div class="footer-copy">© 2026 ShilpiKa.Architects · Principal Architect: Kavya Sri</div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/917993554838?text=Hello%20ShilpiKa.Architects!%20I%27m%20interested%20in%20collaborating." class="float-wa" target="_blank" title="Chat on WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+</body>
+</html>
